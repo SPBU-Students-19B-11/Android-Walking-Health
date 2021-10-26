@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Walking Health</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="fragment_login_description">Здесь будет описание. Для авторизации введите свой логин и пароль, указанные при регистрации</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="forget_passwsord">Забыли пароль?</string>
+    <string name="enter">Войти</string>
+    <string name="fragment_login_register_description">Зарегистрируйтесь, если вы еще не сделали этого</string>
+    <string name="register">Зарегистрироваться</string>
 </resources>

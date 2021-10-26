@@ -12,7 +12,8 @@
         android:theme="@style/Theme.WalkingHealth">
         <activity
             android:name=".presentation.ui.activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
