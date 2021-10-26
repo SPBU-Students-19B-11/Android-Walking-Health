@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ewake.walkinghealth.databinding.FragmentLoginBinding
 import com.ewake.walkinghealth.presentation.viewmodel.login.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -29,7 +30,56 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        binding.apply {
+            enter.setOnClickListener {
+                if (validateData()) {
+                    viewModel.onLoginButtonClicked(
+                        binding.login.text.toString(),
+                        binding.password.text.toString()
+                    )
+                }
+            }
+
+            forgetPassword.setOnClickListener {
+                viewModel.onForgetPasswordClicked()
+            }
+
+            register.setOnClickListener {
+                viewModel.onRegisterButtonClicked()
+            }
+        }
+
+        viewModel.apply {
+            messageLiveData.observe(viewLifecycleOwner, ::showMessage)
+        }
+
         return binding.root
+    }
+
+    private fun validateData(): Boolean {
+        var result = true
+
+        binding.apply {
+            loginContainer.error = if (login.text.isNullOrEmpty()) {
+                result = false
+                "Введите логин"
+            } else {
+                null
+            }
+
+            passwordContainer.error = if (password.text.isNullOrEmpty()) {
+                result = false
+                "Введите пароль"
+            } else {
+                null
+            }
+        }
+
+        return result
+    }
+
+    private fun showMessage(string: String) {
+        Snackbar.make(binding.root, string, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
