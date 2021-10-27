@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/WalkingHealth/app/src/main/res/layout/activity_main.xml" value="0.16893115942028986" />
         <entry key="..\:/WalkingHealth/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/WalkingHealth/app/src/main/res/layout/fragment_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/WalkingHealth/app/src/main/res/layout/item_dropdown.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

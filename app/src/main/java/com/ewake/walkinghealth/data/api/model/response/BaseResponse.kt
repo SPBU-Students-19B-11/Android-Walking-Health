@@ -2,6 +2,7 @@ package com.ewake.walkinghealth.data.api.model.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.net.HttpURLConnection
 
 /**
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
@@ -15,3 +16,12 @@ open class BaseResponse<T>(
     @Json(name = "message")
     var message: String = ""
 )
+
+fun <T> BaseResponse<T>.isSuccess(): Boolean {
+    return code == HttpURLConnection.HTTP_OK
+}
+
+fun <T> BaseResponse<T>.onSuccess(onSuccess: (T?) -> Unit): BaseResponse<T> {
+    if (isSuccess()) onSuccess.invoke(result)
+    return this
+}

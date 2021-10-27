@@ -7,5 +7,11 @@ import com.ewake.walkinghealth.domain.repository.base.BaseRepository
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
 interface UserRepository : BaseRepository {
-   suspend fun login(login: String, password: String): BaseResponse<String>
+    suspend fun login(login: String, password: String): BaseResponse<String>
+    suspend fun register(
+        login: String,
+        password: String,
+        fullname: String,
+        doctorLogin: String? = null
+    ): BaseResponse<String>
 }

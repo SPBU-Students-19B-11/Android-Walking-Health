@@ -19,4 +19,16 @@ open class BaseViewModel(app: App) : AndroidViewModel(app) {
 
     protected val _navigateBackLiveData = MutableLiveData<Unit>()
     val navigateBackLiveData: LiveData<Unit> = _navigateBackLiveData
+
+    private var isStart = false
+
+    fun start() {
+        if (!isStart) {
+            onStart()
+        }
+    }
+
+    open fun onStart() {
+        // NO IMPL
+    }
 }

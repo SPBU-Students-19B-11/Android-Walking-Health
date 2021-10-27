@@ -8,4 +8,6 @@
     <string name="enter">Войти</string>
     <string name="fragment_login_register_description">Зарегистрируйтесь, если вы еще не сделали этого</string>
     <string name="register">Зарегистрироваться</string>
+    <string name="repassword">Повторите пароль</string>
+    <string name="fragment_register_conditions">Нажимая кнопку зарегистрироваться вы принимаете условия <a href="http://somesite.com/">пользовательских данных</a></string>
 </resources>

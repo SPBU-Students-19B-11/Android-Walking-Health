@@ -4,6 +4,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.ewake.walkinghealth.domain.usecase.LoginUseCase
 import com.ewake.walkinghealth.presentation.app.App
+import com.ewake.walkinghealth.presentation.ui.fragment.login.LoginFragmentDirections
 import com.ewake.walkinghealth.presentation.viewmodel.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onRegisterButtonClicked() {
-        _messageLiveData.postValue("Переход на Регистрацию")
+        _navigationLiveData.postValue(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
     }
 
     fun onForgetPasswordClicked() {

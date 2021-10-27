@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.ewake.walkinghealth.databinding.FragmentLoginBinding
 import com.ewake.walkinghealth.presentation.viewmodel.login.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -51,6 +53,7 @@ class LoginFragment : Fragment() {
 
         viewModel.apply {
             messageLiveData.observe(viewLifecycleOwner, ::showMessage)
+            navigationLiveData.observe(viewLifecycleOwner, ::navigate)
         }
 
         return binding.root
@@ -80,6 +83,10 @@ class LoginFragment : Fragment() {
 
     private fun showMessage(string: String) {
         Snackbar.make(binding.root, string, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun navigate(action: NavDirections) {
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {
