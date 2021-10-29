@@ -1,6 +1,7 @@
 package com.ewake.walkinghealth.domain.repository.user
 
 import com.ewake.walkinghealth.data.api.model.response.BaseResponse
+import com.ewake.walkinghealth.data.api.model.response.UserDataResult
 import com.ewake.walkinghealth.domain.repository.base.BaseRepository
 
 /**
@@ -14,4 +15,5 @@ interface UserRepository : BaseRepository {
         fullname: String,
         doctorLogin: String? = null
     ): BaseResponse<String>
+    suspend fun getUserData(): BaseResponse<UserDataResult>
 }

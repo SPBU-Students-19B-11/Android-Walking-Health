@@ -31,6 +31,7 @@ class LoginViewModel @Inject constructor(
 
         if (response.code == HttpURLConnection.HTTP_OK && response.result != null) {
             _messageLiveData.postValue(response.message)
+            _navigationLiveData.postValue(LoginFragmentDirections.actionLoginFragmentToProfileFragment())
         }
     }
 

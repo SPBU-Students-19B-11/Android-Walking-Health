@@ -4,6 +4,7 @@ import com.ewake.walkinghealth.data.api.Api
 import com.ewake.walkinghealth.data.api.model.request.LoginRequest
 import com.ewake.walkinghealth.data.api.model.request.RegisterRequest
 import com.ewake.walkinghealth.data.api.model.response.BaseResponse
+import com.ewake.walkinghealth.data.api.model.response.UserDataResult
 import com.ewake.walkinghealth.domain.repository.user.UserRepository
 import javax.inject.Inject
 
@@ -37,6 +38,20 @@ class UserRepositoryImpl @Inject constructor(private val api: Api) : UserReposit
             code = 200,
             message = "Вы успешно зарегистрировались",
             result = "TestToken"
+        )
+    }
+
+    override suspend fun getUserData(): BaseResponse<UserDataResult> {
+        // return api.getUserData()
+
+        return BaseResponse(
+            200,
+            result = UserDataResult(
+                "test",
+                "Иванов Иван Иванович",
+                false,
+                "testtesttest"
+            )
         )
     }
 }
