@@ -21,12 +21,12 @@ fun <T> BaseResponse<T>.isSuccess(): Boolean {
     return code == HttpURLConnection.HTTP_OK
 }
 
-fun <T> BaseResponse<T>.onSuccess(onSuccess: (T?) -> Unit): BaseResponse<T> {
+inline fun <T> BaseResponse<T>.onSuccess(onSuccess: (T?) -> Unit): BaseResponse<T> {
     if (isSuccess()) onSuccess.invoke(result)
     return this
 }
 
-fun <T> BaseResponse<T>.onFailure(onFailure: (String) -> Unit): BaseResponse<T> {
+inline fun <T> BaseResponse<T>.onFailure(onFailure: (String) -> Unit): BaseResponse<T> {
     if (!isSuccess()) onFailure.invoke(message)
     return this
 }

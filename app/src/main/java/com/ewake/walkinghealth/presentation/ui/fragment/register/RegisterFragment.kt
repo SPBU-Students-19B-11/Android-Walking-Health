@@ -14,6 +14,7 @@ import com.ewake.walkinghealth.R
 import com.ewake.walkinghealth.databinding.FragmentRegisterBinding
 import com.ewake.walkinghealth.presentation.model.RegistrationModel
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
+import com.ewake.walkinghealth.presentation.ui.activity.MainActivity
 import com.ewake.walkinghealth.presentation.viewmodel.register.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,6 +70,8 @@ class RegisterFragment : Fragment() {
 
             doctors.setAdapter(doctorsAdapter)
         }
+
+        (activity as MainActivity).isBottomNavigationVisible = false
 
         viewModel.apply {
             messageLiveData.observe(viewLifecycleOwner, ::showMessage)

@@ -1,6 +1,7 @@
 package com.ewake.walkinghealth.presentation.di.hilt
 
 import com.ewake.walkinghealth.data.api.Api
+import com.ewake.walkinghealth.data.api.interceptors.UserDataInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,12 +18,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @InstallIn(SingletonComponent::class)
 class AppModule {
     @Provides
-    fun provideOkHttp(): OkHttpClient {
+    fun provideOkHttp(userDataInterceptor: UserDataInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
 
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         builder.addInterceptor(loggingInterceptor)
+            .addInterceptor(userDataInterceptor)
 
         return builder.build()
     }
@@ -31,7 +33,7 @@ class AppModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
-                // TODO Добавить реальный URL
+            // TODO Добавить реальный URL
             .baseUrl("https://github.com")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()

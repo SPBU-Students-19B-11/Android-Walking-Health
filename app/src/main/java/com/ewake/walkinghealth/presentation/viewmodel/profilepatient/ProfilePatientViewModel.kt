@@ -18,7 +18,7 @@ import javax.inject.Inject
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
 @HiltViewModel
-class ProfileViewModel @Inject constructor(
+class ProfilePatientViewModel @Inject constructor(
     app: App,
     private val userDataUseCase: UserDataUseCase
 ) : BaseViewModel(app) {

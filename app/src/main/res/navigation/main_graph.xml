@@ -24,8 +24,15 @@
             android:id="@+id/action_registerFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.ewake.walkinghealth.presentation.ui.fragment.profilepatient.ProfileFragment"
+        android:name="com.ewake.walkinghealth.presentation.ui.fragment.profilepatient.ProfilePatientFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.ewake.walkinghealth.presentation.ui.fragment.messages.MessagesFragment"
+        android:label="MessagesFragment" />
+
+
 </navigation>

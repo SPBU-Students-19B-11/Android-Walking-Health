@@ -9,11 +9,19 @@ import com.ewake.walkinghealth.domain.repository.base.BaseRepository
  */
 interface UserRepository : BaseRepository {
     suspend fun login(login: String, password: String): BaseResponse<String>
+
     suspend fun register(
         login: String,
         password: String,
         fullname: String,
         doctorLogin: String? = null
     ): BaseResponse<String>
+
     suspend fun getUserData(): BaseResponse<UserDataResult>
+
+    suspend fun saveToken(token: String)
+    suspend fun saveLogin(login: String)
+
+    suspend fun getToken(): String?
+    suspend fun getLogin(): String?
 }

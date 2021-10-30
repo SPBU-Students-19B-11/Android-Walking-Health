@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.ewake.walkinghealth.databinding.FragmentLoginBinding
+import com.ewake.walkinghealth.presentation.ui.activity.MainActivity
 import com.ewake.walkinghealth.presentation.viewmodel.login.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,8 @@ class LoginFragment : Fragment() {
                 viewModel.onRegisterButtonClicked()
             }
         }
+
+        (activity as MainActivity).isBottomNavigationVisible = false
 
         viewModel.apply {
             messageLiveData.observe(viewLifecycleOwner, ::showMessage)

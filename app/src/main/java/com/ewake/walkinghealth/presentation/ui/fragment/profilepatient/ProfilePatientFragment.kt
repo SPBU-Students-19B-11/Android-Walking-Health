@@ -9,7 +9,8 @@ import androidx.fragment.app.viewModels
 import com.ewake.walkinghealth.databinding.FragmentProfilePatientBinding
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
 import com.ewake.walkinghealth.presentation.model.UserDataModel
-import com.ewake.walkinghealth.presentation.viewmodel.profilepatient.ProfileViewModel
+import com.ewake.walkinghealth.presentation.ui.activity.MainActivity
+import com.ewake.walkinghealth.presentation.viewmodel.profilepatient.ProfilePatientViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,13 +18,13 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfilePatientFragment : Fragment() {
 
     private var _binding: FragmentProfilePatientBinding? = null
     private val binding: FragmentProfilePatientBinding
         get() = _binding!!
 
-    private val viewModel by viewModels<ProfileViewModel>()
+    private val viewModel by viewModels<ProfilePatientViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +32,8 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfilePatientBinding.inflate(inflater, container, false)
+
+        (activity as MainActivity).isBottomNavigationVisible = true
 
         viewModel.apply {
             userDataLiveData.observe(viewLifecycleOwner, ::setData)
