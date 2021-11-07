@@ -1,6 +1,7 @@
 package com.ewake.walkinghealth.presentation.di.hilt
 
 import com.ewake.walkinghealth.data.api.Api
+import com.ewake.walkinghealth.data.local.prefs.UserDataPrefs
 import com.ewake.walkinghealth.domain.repository.impl.MedicalRepositoryImpl
 import com.ewake.walkinghealth.domain.repository.impl.UserRepositoryImpl
 import com.ewake.walkinghealth.domain.repository.medical.MedicalRepository
@@ -17,7 +18,8 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
     @Provides
-    fun provideUserRepository(api: Api): UserRepository = UserRepositoryImpl(api)
+    fun provideUserRepository(api: Api, userDataPrefs: UserDataPrefs): UserRepository =
+        UserRepositoryImpl(api, userDataPrefs)
 
     @Provides
     fun provideMedicalRepository(api: Api): MedicalRepository = MedicalRepositoryImpl(api)
