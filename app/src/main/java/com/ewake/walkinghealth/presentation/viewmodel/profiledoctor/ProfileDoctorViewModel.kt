@@ -1,4 +1,4 @@
-package com.ewake.walkinghealth.presentation.viewmodel.profilepatient
+package com.ewake.walkinghealth.presentation.viewmodel.profiledoctor
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,17 +9,14 @@ import com.ewake.walkinghealth.domain.usecase.UserDataUseCase
 import com.ewake.walkinghealth.presentation.app.App
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
 import com.ewake.walkinghealth.presentation.model.UserDataModel
-import com.ewake.walkinghealth.presentation.ui.fragment.profilepatient.ProfilePatientFragmentDirections
+import com.ewake.walkinghealth.presentation.ui.fragment.profiledoctor.ProfileDoctorFragmentDirections
 import com.ewake.walkinghealth.presentation.viewmodel.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
- */
 @HiltViewModel
-class ProfilePatientViewModel @Inject constructor(
+class ProfileDoctorViewModel @Inject constructor(
     app: App,
     private val userDataUseCase: UserDataUseCase
 ) : BaseViewModel(app) {
@@ -55,14 +52,16 @@ class ProfilePatientViewModel @Inject constructor(
         }
     }
 
+    fun onPatientClicked(model: SimpleUserModel) {
+        _navigationLiveData.postValue(
+            ProfileDoctorFragmentDirections.actionProfileDoctorFragmentToProfileFragment()
+        )
+    }
+
     override fun onStart() {
         viewModelScope.launch {
             loadUserData()
         }
     }
 
-    fun onMessagesClicked() {
-        val action = ProfilePatientFragmentDirections.actionProfileFragmentToMessagesFragment(userData.login)
-        _navigationLiveData.postValue(action)
-    }
 }

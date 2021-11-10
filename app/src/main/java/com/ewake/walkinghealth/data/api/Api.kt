@@ -2,10 +2,7 @@ package com.ewake.walkinghealth.data.api
 
 import com.ewake.walkinghealth.data.api.model.request.LoginRequest
 import com.ewake.walkinghealth.data.api.model.request.RegisterRequest
-import com.ewake.walkinghealth.data.api.model.response.BaseResponse
-import com.ewake.walkinghealth.data.api.model.response.GetDoctorsResult
-import com.ewake.walkinghealth.data.api.model.response.MessagesResult
-import com.ewake.walkinghealth.data.api.model.response.UserDataResult
+import com.ewake.walkinghealth.data.api.model.response.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -17,13 +14,13 @@ import retrofit2.http.Query
 
 interface Api {
     @POST("user/login")
-    suspend fun login(@Body request: LoginRequest): BaseResponse<String>
+    suspend fun login(@Body request: LoginRequest): BaseResponse<AuthResponse>
 
     @GET("medical/getDoctors")
     suspend fun getDoctors(): BaseResponse<List<GetDoctorsResult>>
 
     @POST("user/register")
-    suspend fun register(@Body request: RegisterRequest): BaseResponse<String>
+    suspend fun register(@Body request: RegisterRequest): BaseResponse<AuthResponse>
 
     @GET("user/getData")
     suspend fun getUserData(): BaseResponse<UserDataResult>

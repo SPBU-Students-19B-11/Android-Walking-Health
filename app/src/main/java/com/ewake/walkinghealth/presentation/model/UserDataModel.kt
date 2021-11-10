@@ -7,9 +7,9 @@ import com.squareup.moshi.JsonClass
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
 data class UserDataModel(
-    var login: String = "",
-    var fullname: String = "",
+    override var login: String = "",
+    override var fullname: String = "",
     var isDoctor: Boolean = false,
     var doctor: SimpleUserModel? = null,
     var patients: List<SimpleUserModel>? = null
-)
+): SimpleUserModel()

@@ -52,8 +52,6 @@ class LoginFragment : Fragment() {
             }
         }
 
-        (activity as MainActivity).isBottomNavigationVisible = false
-
         viewModel.apply {
             messageLiveData.observe(viewLifecycleOwner, ::showMessage)
             navigationLiveData.observe(viewLifecycleOwner, ::navigate)

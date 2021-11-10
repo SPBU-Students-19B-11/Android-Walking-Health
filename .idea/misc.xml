@@ -13,6 +13,10 @@
         <entry key="..\:/WalkingHealth/app/src/main/res/layout/item_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/WalkingHealth/app/src/main/res/layout/message_item.xml" value="0.4" />
         <entry key="..\:/WalkingHealth/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.24615384615384617" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2513586956521739" />
+        <entry key="app/src/main/res/layout/fragment_profile_doctor.xml" value="0.19972826086956522" />
+        <entry key="app/src/main/res/layout/fragment_profile_patient.xml" value="0.19972826086956522" />
+        <entry key="app/src/main/res/layout/item_patient.xml" value="0.19655797101449277" />
       </map>
     </option>
   </component>

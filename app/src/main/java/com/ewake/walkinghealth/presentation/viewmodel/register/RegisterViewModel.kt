@@ -11,7 +11,7 @@ import com.ewake.walkinghealth.domain.usecase.SaveUserTokenUseCase
 import com.ewake.walkinghealth.presentation.app.App
 import com.ewake.walkinghealth.presentation.model.RegistrationModel
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
-import com.ewake.walkinghealth.presentation.ui.fragment.register.RegisterFragmentDirections
+import com.ewake.walkinghealth.presentation.ui.fragment.login.LoginFragmentDirections
 import com.ewake.walkinghealth.presentation.viewmodel.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -84,9 +84,13 @@ class RegisterViewModel @Inject constructor(
         ).onSuccess {
             if (it != null) {
                 _messageLiveData.postValue("Вы успешно зарегистрированы")
-                saveUserLoginUseCase.invoke(model.login)
-                saveUserTokenUseCase.invoke(it)
-                _navigationLiveData.postValue(RegisterFragmentDirections.actionRegisterFragmentToProfileFragment())
+                saveUserLoginUseCase.invoke(it.login)
+                saveUserTokenUseCase.invoke(it.token)
+                if (it.isDoctor) {
+                    LoginFragmentDirections.actionLoginFragmentToProfileDoctorFragment()
+                } else {
+                    LoginFragmentDirections.actionLoginFragmentToProfileFragment()
+                }
             }
         }
     }

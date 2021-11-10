@@ -71,8 +71,6 @@ class RegisterFragment : Fragment() {
             doctors.setAdapter(doctorsAdapter)
         }
 
-        (activity as MainActivity).isBottomNavigationVisible = false
-
         viewModel.apply {
             messageLiveData.observe(viewLifecycleOwner, ::showMessage)
             navigationLiveData.observe(viewLifecycleOwner, ::navigate)

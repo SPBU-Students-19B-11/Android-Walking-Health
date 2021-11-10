@@ -43,8 +43,6 @@ class MessagesFragment : Fragment() {
             }
         }
 
-        (activity as MainActivity).isBottomNavigationVisible = true
-
         viewModel.apply {
             messagesLiveData.observe(viewLifecycleOwner, ::setItems)
             messageLiveData.observe(viewLifecycleOwner, ::showMessage)

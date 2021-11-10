@@ -3,6 +3,7 @@ package com.ewake.walkinghealth.domain.repository.impl
 import com.ewake.walkinghealth.data.api.Api
 import com.ewake.walkinghealth.data.api.model.request.LoginRequest
 import com.ewake.walkinghealth.data.api.model.request.RegisterRequest
+import com.ewake.walkinghealth.data.api.model.response.AuthResponse
 import com.ewake.walkinghealth.data.api.model.response.BaseResponse
 import com.ewake.walkinghealth.data.api.model.response.UserDataResult
 import com.ewake.walkinghealth.data.local.prefs.UserDataPrefs
@@ -17,10 +18,16 @@ class UserRepositoryImpl @Inject constructor(
     private val userDataPrefs: UserDataPrefs
 ) : UserRepository {
 
-    override suspend fun login(login: String, password: String): BaseResponse<String> {
+    override suspend fun login(login: String, password: String): BaseResponse<AuthResponse> {
         //return api.login(LoginRequest(login = login, password = password))
 
-        return BaseResponse(code = 200, message = "Вы успешно авторизированы", result = "TestToken")
+        return BaseResponse(
+            code = 200, message = "Вы успешно авторизированы", result = AuthResponse(
+                token = "TestToken",
+                login = login,
+                isDoctor = true
+            )
+        )
     }
 
     override suspend fun register(
@@ -28,7 +35,7 @@ class UserRepositoryImpl @Inject constructor(
         password: String,
         fullname: String,
         doctorLogin: String?
-    ): BaseResponse<String> {
+    ): BaseResponse<AuthResponse> {
         /*return api.register(
             RegisterRequest(
                 login = login,
@@ -39,9 +46,11 @@ class UserRepositoryImpl @Inject constructor(
         )*/
 
         return BaseResponse(
-            code = 200,
-            message = "Вы успешно зарегистрировались",
-            result = "TestToken"
+            code = 200, message = "Вы успешно зарегистрировались", result = AuthResponse(
+                token = "TestToken",
+                login = login,
+                isDoctor = true
+            )
         )
     }
 
@@ -53,8 +62,14 @@ class UserRepositoryImpl @Inject constructor(
             result = UserDataResult(
                 "test",
                 "Иванов Иван Иванович",
-                false,
-                "testtesttest"
+                true,
+                "testtesttest",
+                patients = listOf(
+                    UserDataResult.Patients("test", "Иванов Иван Иванович"),
+                    UserDataResult.Patients("test", "Иванов Иван Иванович"),
+                    UserDataResult.Patients("test", "Иванов Иван Иванович"),
+                    UserDataResult.Patients("test", "Иванов Иван Иванович")
+                )
             )
         )
     }

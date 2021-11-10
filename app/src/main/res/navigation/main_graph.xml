@@ -10,10 +10,16 @@
         android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_profileDoctorFragment"
+            app:destination="@id/profileDoctorFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -23,16 +29,40 @@
         <action
             android:id="@+id/action_registerFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_profileDoctorFragment"
+            app:destination="@id/profileDoctorFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ewake.walkinghealth.presentation.ui.fragment.profilepatient.ProfilePatientFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_messagesFragment"
+            app:destination="@id/messagesFragment" />
+        <argument
+            android:name="userLogin"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/messagesFragment"
         android:name="com.ewake.walkinghealth.presentation.ui.fragment.messages.MessagesFragment"
-        android:label="MessagesFragment" />
+        android:label="MessagesFragment" >
+        <argument
+            android:name="login"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileDoctorFragment"
+        android:name="com.ewake.walkinghealth.presentation.ui.fragment.profiledoctor.ProfileDoctorFragment"
+        android:label="ProfileDoctorFragment" >
+        <action
+            android:id="@+id/action_profileDoctorFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
 
 </navigation>

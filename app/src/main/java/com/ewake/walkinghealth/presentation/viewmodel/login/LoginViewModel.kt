@@ -34,10 +34,22 @@ class LoginViewModel @Inject constructor(
         val response = loginUseCase.invoke(login, password)
 
         if (response.code == HttpURLConnection.HTTP_OK && response.result != null) {
-            saveUserLoginUseCase.invoke(login)
-            response.result?.let { saveUserTokenUseCase.invoke(it) }
+            response.result?.let {
+                saveUserLoginUseCase.invoke(it.login)
+                saveUserTokenUseCase.invoke(it.token)
+
+                _navigationLiveData.postValue(
+                    if (it.isDoctor) {
+                        LoginFragmentDirections.actionLoginFragmentToProfileDoctorFragment()
+                    } else {
+                        LoginFragmentDirections.actionLoginFragmentToProfileFragment()
+                    }
+                )
+            }
+
             _messageLiveData.postValue(response.message)
-            _navigationLiveData.postValue(LoginFragmentDirections.actionLoginFragmentToProfileFragment())
+
+
         }
     }
 
