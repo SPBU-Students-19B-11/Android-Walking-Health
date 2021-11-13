@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ewake.walkinghealth.databinding.FragmentMessagesBinding
 import com.ewake.walkinghealth.presentation.model.MessageModel
@@ -28,6 +29,13 @@ class MessagesFragment : Fragment() {
     private val viewModel by viewModels<MessagesViewModel>()
 
     private val messagesAdapter = MessagesAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val args by navArgs<MessagesFragmentArgs>()
+        viewModel.login = args.login
+        viewModel.doctorFullname = args.doctorFullname
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -18,7 +18,7 @@ interface UserRepository : BaseRepository {
         doctorLogin: String? = null
     ): BaseResponse<AuthResponse>
 
-    suspend fun getUserData(): BaseResponse<UserDataResult>
+    suspend fun getUserData(login: String? = null): BaseResponse<UserDataResult>
 
     suspend fun saveToken(token: String)
     suspend fun saveLogin(login: String)

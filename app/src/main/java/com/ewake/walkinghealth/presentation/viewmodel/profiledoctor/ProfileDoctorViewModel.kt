@@ -54,7 +54,7 @@ class ProfileDoctorViewModel @Inject constructor(
 
     fun onPatientClicked(model: SimpleUserModel) {
         _navigationLiveData.postValue(
-            ProfileDoctorFragmentDirections.actionProfileDoctorFragmentToProfileFragment()
+            ProfileDoctorFragmentDirections.actionProfileDoctorFragmentToProfileFragment(model.login)
         )
     }
 

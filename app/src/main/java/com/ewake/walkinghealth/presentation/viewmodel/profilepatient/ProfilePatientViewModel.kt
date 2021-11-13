@@ -29,8 +29,10 @@ class ProfilePatientViewModel @Inject constructor(
 
     private var userData = UserDataModel()
 
+    var login: String? = null
+
     private suspend fun loadUserData() {
-        val response = userDataUseCase()
+        val response = userDataUseCase(login)
 
         response.onSuccess {
             if (it != null) {
@@ -62,7 +64,10 @@ class ProfilePatientViewModel @Inject constructor(
     }
 
     fun onMessagesClicked() {
-        val action = ProfilePatientFragmentDirections.actionProfileFragmentToMessagesFragment(userData.login)
+        val action = ProfilePatientFragmentDirections.actionProfileFragmentToMessagesFragment(
+            userData.login,
+            userData.doctor?.fullname ?: ""
+        )
         _navigationLiveData.postValue(action)
     }
 }

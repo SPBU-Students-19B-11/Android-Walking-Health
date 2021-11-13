@@ -23,7 +23,7 @@ interface Api {
     suspend fun register(@Body request: RegisterRequest): BaseResponse<AuthResponse>
 
     @GET("user/getData")
-    suspend fun getUserData(): BaseResponse<UserDataResult>
+    suspend fun getUserData(@Query("login") login: String? = null): BaseResponse<UserDataResult>
 
     @GET("medical/getMessages")
     suspend fun getMessages(@Query("userId") login: String): BaseResponse<List<MessagesResult>>

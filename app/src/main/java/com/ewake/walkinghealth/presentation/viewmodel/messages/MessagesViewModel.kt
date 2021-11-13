@@ -21,21 +21,17 @@ import javax.inject.Inject
 @HiltViewModel
 class MessagesViewModel @Inject constructor(
     app: App,
-    private val messagesUseCase: MessagesUseCase,
-    private val getUserLoginUseCase: GetUserLoginUseCase
+    private val messagesUseCase: MessagesUseCase
 ) : BaseViewModel(app) {
 
     private val _messagesLiveData = MutableLiveData<List<MessageModel>>()
     val messagesLiveData: LiveData<List<MessageModel>> = _messagesLiveData
 
-    private var userModel: SimpleUserModel? = null
+    var login: String = ""
+    var doctorFullname: String = ""
 
     private suspend fun loadMessages() {
-        val response = if (userModel != null) {
-            messagesUseCase(userModel!!.login)
-        } else {
-            messagesUseCase(getCurrentUserId())
-        }
+        val response = messagesUseCase(login)
 
         response.onSuccess { result ->
             if (result != null) {
@@ -48,10 +44,6 @@ class MessagesViewModel @Inject constructor(
         }.onFailure {
             _messageLiveData.postValue(it)
         }
-    }
-
-    private suspend fun getCurrentUserId(): String {
-        return getUserLoginUseCase() ?: ""
     }
 
     override fun onStart() {

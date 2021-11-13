@@ -54,6 +54,9 @@
         <argument
             android:name="login"
             app:argType="string" />
+        <argument
+            android:name="doctorFullname"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/profileDoctorFragment"

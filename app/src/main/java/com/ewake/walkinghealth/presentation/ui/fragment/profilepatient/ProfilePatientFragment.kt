@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.ewake.walkinghealth.databinding.FragmentProfilePatientBinding
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
 import com.ewake.walkinghealth.presentation.model.UserDataModel
@@ -27,6 +28,12 @@ class ProfilePatientFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel by viewModels<ProfilePatientViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val args by navArgs<ProfilePatientFragmentArgs>()
+        viewModel.login = args.userLogin
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

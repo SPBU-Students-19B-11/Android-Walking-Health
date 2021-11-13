@@ -54,8 +54,8 @@ class UserRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getUserData(): BaseResponse<UserDataResult> {
-        // return api.getUserData()
+    override suspend fun getUserData(login: String?): BaseResponse<UserDataResult> {
+        // return api.getUserData(login)
 
         return BaseResponse(
             200,
