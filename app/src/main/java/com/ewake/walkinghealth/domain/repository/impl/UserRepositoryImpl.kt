@@ -82,7 +82,7 @@ class UserRepositoryImpl @Inject constructor(
         userDataPrefs.login = login
     }
 
-    override suspend fun getToken(): String? = userDataPrefs.token
+    override fun getToken(): String? = userDataPrefs.token
 
-    override suspend fun getLogin(): String? = userDataPrefs.login
+    override fun getLogin(): String? = userDataPrefs.login
 }

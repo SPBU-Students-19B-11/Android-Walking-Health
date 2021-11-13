@@ -23,6 +23,6 @@ interface UserRepository : BaseRepository {
     suspend fun saveToken(token: String)
     suspend fun saveLogin(login: String)
 
-    suspend fun getToken(): String?
-    suspend fun getLogin(): String?
+    fun getToken(): String?
+    fun getLogin(): String?
 }

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -64,6 +64,20 @@
         android:label="ProfileDoctorFragment" >
         <action
             android:id="@+id/action_profileDoctorFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.ewake.walkinghealth.presentation.ui.fragment.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_profileDoctorFragment"
+            app:destination="@id/profileDoctorFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
 

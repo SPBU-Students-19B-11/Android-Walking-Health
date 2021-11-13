@@ -26,10 +26,17 @@ class UserDataPrefs @Inject constructor(@ApplicationContext context: Context) {
             prefs.edit().putString(TOKEN_KEY, value).commit()
         }
 
+    var isDoctor: Boolean
+        get() = prefs.getBoolean(DOCTOR_KEY, false)
+        set(value) {
+            prefs.edit().putBoolean(LOGIN_KEY, value).apply()
+        }
+
     companion object {
         private const val PREFS_NAME = "userDataPrefs"
 
         private const val LOGIN_KEY = "login"
         private const val TOKEN_KEY = "token"
+        private const val DOCTOR_KEY = "isDoctor"
     }
 }
