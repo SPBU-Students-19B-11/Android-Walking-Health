@@ -9,6 +9,10 @@
     <uses-feature android:name="android.hardware.SensorEventListener"/>
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".presentation.app.App"
@@ -29,8 +33,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".data.service.StepCountingService"/>
-        <service android:name=".data.service.AccelerationService"/>
+        <service android:name="com.ewake.walkinghealth.presentation.service.StepCountingService"/>
+        <service android:name="com.ewake.walkinghealth.presentation.service.AccelerationService"/>
+        <service android:name="com.ewake.walkinghealth.presentation.service.SpeedService"/>
     </application>
 
 </manifest>

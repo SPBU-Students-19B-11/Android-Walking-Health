@@ -1,19 +1,16 @@
-package com.ewake.walkinghealth.data.service
+package com.ewake.walkinghealth.presentation.service
 
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.ewake.walkinghealth.presentation.ui.activity.MainActivity
 
 class StepCountingService : Service(), SensorEventListener {
 
@@ -29,7 +26,7 @@ class StepCountingService : Service(), SensorEventListener {
         }
 
     private val notification: Notification by lazy {
-        NotificationCompat.Builder(this, AccelerationService.ACCELERATION_SERVICE_TAG)
+        NotificationCompat.Builder(this, MainActivity.SERVICE_NOTIFICATION_CHANNEL)
             .setContentTitle("Считаем ваши шаги")
             .setCategory(Notification.CATEGORY_SERVICE)
             .build()
@@ -38,8 +35,6 @@ class StepCountingService : Service(), SensorEventListener {
     override fun onCreate() {
         super.onCreate()
         Log.i(STEP_COUNTING_SERVICE_TAG, "Starting")
-
-        createNotificationChannel()
 
         val result = sensorManager?.registerListener(this, stepDetectorSensor, 0)
         if (result != true) {
@@ -74,21 +69,6 @@ class StepCountingService : Service(), SensorEventListener {
         tempSteps = 0
     }
 
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Уведомления отслеживания шагов"
-            val descriptionText = "Показ уведомления на отслеживание шагов"
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(STEP_COUNTING_SERVICE_TAG, name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
     companion object {
         const val STEPS_KEY = "steps"
 
@@ -96,6 +76,6 @@ class StepCountingService : Service(), SensorEventListener {
 
         private const val STEPS_DELAY = 10
 
-        private const val SERVICE_ID = 102
+        private const val SERVICE_ID = 103
     }
 }

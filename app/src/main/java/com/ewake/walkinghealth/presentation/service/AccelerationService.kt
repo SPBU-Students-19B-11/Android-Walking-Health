@@ -1,19 +1,16 @@
-package com.ewake.walkinghealth.data.service
+package com.ewake.walkinghealth.presentation.service
 
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.ewake.walkinghealth.presentation.ui.activity.MainActivity
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -23,7 +20,7 @@ class AccelerationService : Service(), SensorEventListener {
     private val accelerationSensor by lazy { sensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) }
 
     private val notification: Notification by lazy {
-        NotificationCompat.Builder(this, ACCELERATION_SERVICE_TAG)
+        NotificationCompat.Builder(this, MainActivity.SERVICE_NOTIFICATION_CHANNEL)
             .setContentTitle("Вычисляем ваше ускорение")
             .setCategory(Notification.CATEGORY_SERVICE)
             .build()
@@ -35,8 +32,6 @@ class AccelerationService : Service(), SensorEventListener {
     override fun onCreate() {
         super.onCreate()
         Log.i(ACCELERATION_SERVICE_TAG, "Starting")
-
-        createNotificationChannel()
 
         val result = sensorManager?.registerListener(this, accelerationSensor, 0)
         if (result != true) {
@@ -80,21 +75,6 @@ class AccelerationService : Service(), SensorEventListener {
             sendBroadcast(intent)
             accelerationCount = 0
             accelerationSum = 0.0
-        }
-    }
-
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Уведомления отслеживания ускорения"
-            val descriptionText = "Показ уведомления на отслеживание ускорения"
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(ACCELERATION_SERVICE_TAG, name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
         }
     }
 

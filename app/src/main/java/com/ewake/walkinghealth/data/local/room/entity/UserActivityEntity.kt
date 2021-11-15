@@ -9,5 +9,7 @@ data class UserActivityEntity(
     var date: String,
     var stepsCount: Int = 0,
     var accelerationSum: Double = 0.0,
-    var accelerationCount: Long = 0
+    var accelerationCount: Long = 0,
+    var speedSum: Double = 0.0,
+    var speedCount: Long = 0
 )

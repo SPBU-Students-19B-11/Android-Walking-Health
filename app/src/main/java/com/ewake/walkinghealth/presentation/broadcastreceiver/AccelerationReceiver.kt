@@ -6,8 +6,7 @@ import android.content.Intent
 import android.util.Log
 import com.ewake.walkinghealth.data.local.room.AppDatabase
 import com.ewake.walkinghealth.data.local.room.entity.UserActivityEntity
-import com.ewake.walkinghealth.data.service.AccelerationService
-import com.ewake.walkinghealth.data.service.StepCountingService
+import com.ewake.walkinghealth.presentation.service.AccelerationService
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.Date
