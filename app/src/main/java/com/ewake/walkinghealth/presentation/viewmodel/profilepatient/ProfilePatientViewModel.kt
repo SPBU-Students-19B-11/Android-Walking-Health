@@ -20,9 +20,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ProfilePatientViewModel @Inject constructor(
-    app: App,
     private val userDataUseCase: UserDataUseCase
-) : BaseViewModel(app) {
+) : BaseViewModel() {
 
     private val _userDataLiveData = MutableLiveData<UserDataModel>()
     val userDataLiveData: LiveData<UserDataModel> = _userDataLiveData

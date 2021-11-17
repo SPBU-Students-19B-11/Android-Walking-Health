@@ -15,6 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
+import androidx.work.WorkManager
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -70,4 +74,5 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val SERVICE_NOTIFICATION_CHANNEL = "ServiceNotification"
     }
+
 }

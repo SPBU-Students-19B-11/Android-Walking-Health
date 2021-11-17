@@ -1,6 +1,7 @@
 package com.ewake.walkinghealth.domain.repository.impl
 
 import com.ewake.walkinghealth.data.api.Api
+import com.ewake.walkinghealth.data.api.model.request.MedicalSendDataRequest
 import com.ewake.walkinghealth.data.api.model.response.BaseResponse
 import com.ewake.walkinghealth.data.api.model.response.GetDoctorsResult
 import com.ewake.walkinghealth.data.api.model.response.MessagesResult
@@ -46,5 +47,10 @@ class MedicalRepositoryImpl @Inject constructor(private val api: Api) : MedicalR
                 MessagesResult("10", "Тестовое сообщение 10", 120000000)
             )
         )
+    }
+
+    override suspend fun sendData(data: MedicalSendDataRequest): BaseResponse<Any> {
+        // return api.sendMedicalData(data)
+        return BaseResponse(code = 200, message = "OK")
     }
 }

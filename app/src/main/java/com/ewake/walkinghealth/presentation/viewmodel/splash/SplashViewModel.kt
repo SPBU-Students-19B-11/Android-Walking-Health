@@ -11,9 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    app: App,
     private val userDataPrefs: UserDataPrefs,
-) : BaseViewModel(app) {
+) : BaseViewModel() {
 
     private val _startServicesLiveData = SingleEventLiveData<Unit>()
     val startServicesLiveData: LiveData<Unit> = _startServicesLiveData

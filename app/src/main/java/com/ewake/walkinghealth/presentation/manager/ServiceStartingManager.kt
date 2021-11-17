@@ -1,10 +1,13 @@
 package com.ewake.walkinghealth.presentation.manager
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.ewake.walkinghealth.presentation.broadcastreceiver.AccelerationReceiver
 import com.ewake.walkinghealth.presentation.broadcastreceiver.SpeedReceiver
 import com.ewake.walkinghealth.presentation.broadcastreceiver.StepsReceiver
@@ -29,6 +32,11 @@ class ServiceStartingManager @Inject constructor(
 
             registerReceivers(this)
         }
+    }
+
+    fun sendData(context: Context) {
+        val workRequest = OneTimeWorkRequest.Builder(SendingActivityWorker::class.java).build()
+        WorkManager.getInstance(context).enqueue(workRequest)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

@@ -1,16 +1,14 @@
 package com.ewake.walkinghealth.presentation.viewmodel.base
 
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
-import com.ewake.walkinghealth.presentation.app.App
 import com.ewake.walkinghealth.presentation.helper.SingleEventLiveData
 
 /**
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
-open class BaseViewModel(app: App) : AndroidViewModel(app) {
+open class BaseViewModel : ViewModel() {
 
     protected val _messageLiveData = SingleEventLiveData<String>()
     val messageLiveData: LiveData<String> = _messageLiveData

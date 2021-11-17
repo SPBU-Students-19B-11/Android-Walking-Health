@@ -21,10 +21,9 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    app: App,
     private val loginUseCase: LoginUseCase,
     private val userDataPrefs: UserDataPrefs
-) : BaseViewModel(app) {
+) : BaseViewModel() {
 
     private val _startServicesLiveData = SingleEventLiveData<Unit>()
     val startServicesLiveData: LiveData<Unit> = _startServicesLiveData

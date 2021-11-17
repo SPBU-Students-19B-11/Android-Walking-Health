@@ -20,9 +20,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MessagesViewModel @Inject constructor(
-    app: App,
     private val messagesUseCase: MessagesUseCase
-) : BaseViewModel(app) {
+) : BaseViewModel() {
 
     private val _messagesLiveData = MutableLiveData<List<MessageModel>>()
     val messagesLiveData: LiveData<List<MessageModel>> = _messagesLiveData

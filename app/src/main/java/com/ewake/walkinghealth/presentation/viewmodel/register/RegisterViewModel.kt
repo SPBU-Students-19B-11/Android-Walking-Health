@@ -22,12 +22,11 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    app: App,
     private val doctorsUseCase: DoctorsUseCase,
     private val registerUseCase: RegisterUseCase,
     private val saveUserTokenUseCase: SaveUserTokenUseCase,
     private val saveUserLoginUseCase: SaveUserLoginUseCase
-) : BaseViewModel(app) {
+) : BaseViewModel() {
 
     private val _doctorsLiveData = MutableLiveData<MutableList<String>>()
     val doctorsLiveData: LiveData<MutableList<String>> = _doctorsLiveData
