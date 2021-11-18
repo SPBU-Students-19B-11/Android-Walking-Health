@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.ewake.walkinghealth.data.api.Api
 import com.ewake.walkinghealth.data.api.interceptors.UserDataInterceptor
 import com.ewake.walkinghealth.data.local.room.AppDatabase
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,11 +38,12 @@ class AppModule {
 
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
         return Retrofit.Builder()
             .client(okHttpClient)
-            // TODO Добавить реальный URL
-            .baseUrl("https://github.com")
-            .addConverterFactory(MoshiConverterFactory.create())
+            .baseUrl("https://WalkingHealth.pythonanywhere.com")
+            .addConverterFactory(MoshiConverterFactory.create(moshi).withNullSerialization())
             .build()
     }
 

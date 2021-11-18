@@ -8,9 +8,9 @@ import java.net.HttpURLConnection
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
 @JsonClass(generateAdapter = true)
-open class BaseResponse<T>(
+data class BaseResponse<T>(
     @Json(name = "code")
-    var code: Int,
+    var code: Int = 0,
     @Json(name = "result")
     var result: T? = null,
     @Json(name = "message")

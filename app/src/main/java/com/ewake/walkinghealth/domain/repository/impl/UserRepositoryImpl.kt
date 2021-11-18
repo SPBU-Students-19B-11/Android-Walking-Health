@@ -19,15 +19,15 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override suspend fun login(login: String, password: String): BaseResponse<AuthResponse> {
-        //return api.login(LoginRequest(login = login, password = password))
+        return api.login(LoginRequest(login = login, password = password))
 
-        return BaseResponse(
+        /*return BaseResponse(
             code = 200, message = "Вы успешно авторизированы", result = AuthResponse(
                 token = "TestToken",
                 login = login,
                 isDoctor = true
             )
-        )
+        )*/
     }
 
     override suspend fun register(
@@ -36,28 +36,28 @@ class UserRepositoryImpl @Inject constructor(
         fullname: String,
         doctorLogin: String?
     ): BaseResponse<AuthResponse> {
-        /*return api.register(
+        return api.register(
             RegisterRequest(
                 login = login,
                 password = password,
                 fullname = fullname,
                 doctorLogin = doctorLogin
             )
-        )*/
+        )
 
-        return BaseResponse(
+        /*return BaseResponse(
             code = 200, message = "Вы успешно зарегистрировались", result = AuthResponse(
                 token = "TestToken",
                 login = login,
                 isDoctor = true
             )
-        )
+        )*/
     }
 
     override suspend fun getUserData(login: String?): BaseResponse<UserDataResult> {
-        // return api.getUserData(login)
+        return api.getUserData(login)
 
-        return BaseResponse(
+        /*return BaseResponse(
             200,
             result = UserDataResult(
                 "test",
@@ -71,7 +71,7 @@ class UserRepositoryImpl @Inject constructor(
                     UserDataResult.Patients("test", "Иванов Иван Иванович")
                 )
             )
-        )
+        )*/
     }
 
     override suspend fun saveToken(token: String) {

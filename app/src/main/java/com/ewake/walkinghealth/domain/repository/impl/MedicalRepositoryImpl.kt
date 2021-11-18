@@ -13,9 +13,9 @@ import javax.inject.Inject
  */
 class MedicalRepositoryImpl @Inject constructor(private val api: Api) : MedicalRepository {
     override suspend fun getDoctors(): BaseResponse<List<GetDoctorsResult>> {
-        // return api.getDoctors()
+        return api.getDoctors()
 
-        return BaseResponse(
+        /*return BaseResponse(
             200,
             result = listOf(
                 GetDoctorsResult("123", "Петров Петр Иванович"),
@@ -26,13 +26,13 @@ class MedicalRepositoryImpl @Inject constructor(private val api: Api) : MedicalR
                 GetDoctorsResult("1231", "Петров Тест Иванович"),
                 GetDoctorsResult("1230", "Петров Петр Тест")
             )
-        )
+        )*/
     }
 
     override suspend fun getMessages(login: String): BaseResponse<List<MessagesResult>> {
-        // return api.getMessages(login)
+        return api.getMessages(login)
 
-        return BaseResponse(
+        /*return BaseResponse(
             code = 200,
             result = listOf(
                 MessagesResult("1", "Тестовое сообщение", 10000000),
@@ -46,7 +46,7 @@ class MedicalRepositoryImpl @Inject constructor(private val api: Api) : MedicalR
                 MessagesResult("9", "Тестовое сообщение 9", 110000000),
                 MessagesResult("10", "Тестовое сообщение 10", 120000000)
             )
-        )
+        )*/
     }
 
     override suspend fun sendData(data: MedicalSendDataRequest): BaseResponse<Any> {

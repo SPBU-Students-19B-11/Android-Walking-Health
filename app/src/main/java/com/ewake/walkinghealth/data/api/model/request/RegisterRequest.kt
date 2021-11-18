@@ -14,6 +14,6 @@ data class RegisterRequest(
     var password: String,
     @Json(name = "fullname")
     var fullname: String,
-    @Json(name = "doctorId")
+    @Json(name = "doctorLogin")
     var doctorLogin: String? = null
 )
