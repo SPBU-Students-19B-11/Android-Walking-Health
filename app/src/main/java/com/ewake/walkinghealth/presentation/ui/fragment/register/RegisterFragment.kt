@@ -61,6 +61,7 @@ class RegisterFragment : Fragment() {
         binding.apply {
             isDoctor.setOnCheckedChangeListener { _, isChecked ->
                 doctorsContainer.isVisible = !isChecked
+                stepContainer.isVisible = !isChecked
             }
 
             register.setOnClickListener {

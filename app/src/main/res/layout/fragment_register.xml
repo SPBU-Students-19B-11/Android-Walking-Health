@@ -128,16 +128,36 @@
             app:layout_constraintTop_toBottomOf="@id/fullname_container" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/step_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="14dp"
+            android:hint="Длина шага"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/is_doctor"
+            app:layout_constraintTop_toBottomOf="@id/fullname_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/doctors_container"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:hint="Введите ФИО доктора"
             app:layout_constraintEnd_toEndOf="@id/fullname_container"
-            app:layout_constraintStart_toEndOf="@id/is_doctor"
-            app:layout_constraintTop_toBottomOf="@id/fullname_container">
+            app:layout_constraintStart_toStartOf="@id/fullname_container"
+            app:layout_constraintTop_toBottomOf="@id/is_doctor">
 
             <AutoCompleteTextView
                 android:id="@+id/doctors"
@@ -157,7 +177,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/is_doctor" />
+            app:layout_constraintTop_toBottomOf="@id/doctors_container" />
 
         <TextView
             android:id="@+id/conditions"
