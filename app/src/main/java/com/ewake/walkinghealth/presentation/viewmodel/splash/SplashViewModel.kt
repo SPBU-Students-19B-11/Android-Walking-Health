@@ -28,7 +28,6 @@ class SplashViewModel @Inject constructor(
                     SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                 }
                 userDataPrefs.isDoctor -> {
-                    _startServicesLiveData.postValue(Unit)
                     SplashFragmentDirections.actionSplashFragmentToProfileDoctorFragment()
                 }
                 else -> {

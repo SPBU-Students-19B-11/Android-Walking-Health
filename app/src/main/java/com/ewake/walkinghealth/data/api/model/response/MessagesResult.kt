@@ -8,8 +8,6 @@ import com.squareup.moshi.JsonClass
  */
 @JsonClass(generateAdapter = true)
 data class MessagesResult(
-    @Json(name = "id")
-    var id: String = "",
     @Json(name = "message")
     var message: String = "",
     @Json(name = "timestamp")

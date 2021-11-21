@@ -16,20 +16,20 @@ class UserDataPrefs @Inject constructor(@ApplicationContext context: Context) {
         get() = prefs.getString(LOGIN_KEY, null)
         @SuppressLint("ApplySharedPref")
         set(value) {
-            prefs.edit().putString(LOGIN_KEY, value).commit()
+            prefs.edit().putString(LOGIN_KEY, value).apply()
         }
 
     var token: String?
         get() = prefs.getString(TOKEN_KEY, null)
         @SuppressLint("ApplySharedPref")
         set(value) {
-            prefs.edit().putString(TOKEN_KEY, value).commit()
+            prefs.edit().putString(TOKEN_KEY, value).apply()
         }
 
     var isDoctor: Boolean
         get() = prefs.getBoolean(DOCTOR_KEY, false)
         set(value) {
-            prefs.edit().putBoolean(LOGIN_KEY, value).apply()
+            prefs.edit().putBoolean(DOCTOR_KEY, value).apply()
         }
 
     companion object {

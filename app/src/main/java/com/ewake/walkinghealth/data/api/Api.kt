@@ -35,4 +35,7 @@ interface Api {
 
     @POST("medical/sendData")
     suspend fun sendMedicalData(@Body request: MedicalSendDataRequest): BaseResponse<Any>
+
+    @GET("medical/getData")
+    suspend fun getMedicalData(@Query("PatientLogin") login: String?): BaseResponse<List<MedicalGetDataResult>>
 }

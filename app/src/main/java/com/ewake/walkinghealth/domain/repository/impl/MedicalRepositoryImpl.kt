@@ -2,9 +2,12 @@ package com.ewake.walkinghealth.domain.repository.impl
 
 import com.ewake.walkinghealth.data.api.Api
 import com.ewake.walkinghealth.data.api.model.request.MedicalSendDataRequest
+import com.ewake.walkinghealth.data.api.model.request.SendMessageRequest
 import com.ewake.walkinghealth.data.api.model.response.BaseResponse
 import com.ewake.walkinghealth.data.api.model.response.GetDoctorsResult
+import com.ewake.walkinghealth.data.api.model.response.MedicalGetDataResult
 import com.ewake.walkinghealth.data.api.model.response.MessagesResult
+import com.ewake.walkinghealth.data.api.model.response.SendMessageResponse
 import com.ewake.walkinghealth.domain.repository.medical.MedicalRepository
 import javax.inject.Inject
 
@@ -52,5 +55,20 @@ class MedicalRepositoryImpl @Inject constructor(private val api: Api) : MedicalR
     override suspend fun sendData(data: MedicalSendDataRequest): BaseResponse<Any> {
         // return api.sendMedicalData(data)
         return BaseResponse(code = 200, message = "OK")
+    }
+
+    override suspend fun getData(login: String?): BaseResponse<List<MedicalGetDataResult>> {
+        // return api.getMedicalData(login)
+
+        return BaseResponse(code = 200, message = "OK", result = listOf(
+            MedicalGetDataResult("18.11.2021", 10000, 8.0, 2.3, 5000.0),
+            MedicalGetDataResult("17.11.2021", 1000, 3.0, 4.3, 1000.0),
+            MedicalGetDataResult("16.11.2021", 8000, 7.0, 2.4, 8000.0),
+            MedicalGetDataResult("15.11.2021", 9000, 11.0, 5.3, 3000.0)
+        ))
+    }
+
+    override suspend fun sendMessage(message: SendMessageRequest): BaseResponse<SendMessageResponse> {
+        return api.sendMessage(message)
     }
 }

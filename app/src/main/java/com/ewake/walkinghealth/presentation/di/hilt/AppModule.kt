@@ -30,8 +30,8 @@ class AppModule {
 
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        builder.addInterceptor(loggingInterceptor)
-            .addInterceptor(userDataInterceptor)
+        builder.addInterceptor(userDataInterceptor)
+            .addInterceptor(loggingInterceptor)
 
         return builder.build()
     }

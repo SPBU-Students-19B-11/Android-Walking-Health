@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ewake.walkinghealth.data.api.model.response.onFailure
 import com.ewake.walkinghealth.data.api.model.response.onSuccess
+import com.ewake.walkinghealth.data.local.prefs.UserDataPrefs
 import com.ewake.walkinghealth.domain.usecase.UserDataUseCase
 import com.ewake.walkinghealth.presentation.app.App
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileDoctorViewModel @Inject constructor(
-    private val userDataUseCase: UserDataUseCase
+    private val userDataUseCase: UserDataUseCase,
+    private val userDataPrefs: UserDataPrefs
 ) : BaseViewModel() {
 
     private val _userDataLiveData = MutableLiveData<UserDataModel>()
@@ -26,7 +28,7 @@ class ProfileDoctorViewModel @Inject constructor(
     private var userData = UserDataModel()
 
     private suspend fun loadUserData() {
-        val response = userDataUseCase()
+        val response = userDataUseCase(userDataPrefs.login ?: "")
 
         response.onSuccess {
             if (it != null) {
@@ -34,9 +36,9 @@ class ProfileDoctorViewModel @Inject constructor(
                     login = it.login,
                     fullname = it.fullname,
                     isDoctor = it.isDoctor,
-                    doctor = if (it.doctorId != null) SimpleUserModel(
-                        it.doctorId!!,
-                        it.doctorId!!
+                    doctor = if (it.doctor != null) SimpleUserModel(
+                        it.doctor!!.login,
+                        it.doctor!!.fullname
                     ) else null,
                     patients = it.patients?.map { model ->
                         SimpleUserModel(model.login, model.fullname)

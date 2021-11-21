@@ -3,8 +3,10 @@ package com.ewake.walkinghealth.presentation.viewmodel.profilepatient
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ewake.walkinghealth.data.api.model.response.MedicalGetDataResult
 import com.ewake.walkinghealth.data.api.model.response.onFailure
 import com.ewake.walkinghealth.data.api.model.response.onSuccess
+import com.ewake.walkinghealth.domain.usecase.MedicalGetDataUseCase
 import com.ewake.walkinghealth.domain.usecase.UserDataUseCase
 import com.ewake.walkinghealth.presentation.app.App
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
@@ -20,11 +22,15 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ProfilePatientViewModel @Inject constructor(
-    private val userDataUseCase: UserDataUseCase
+    private val userDataUseCase: UserDataUseCase,
+    private val medicalGetDataUseCase: MedicalGetDataUseCase
 ) : BaseViewModel() {
 
     private val _userDataLiveData = MutableLiveData<UserDataModel>()
     val userDataLiveData: LiveData<UserDataModel> = _userDataLiveData
+
+    private val _userActivityLiveData = MutableLiveData<List<MedicalGetDataResult>>()
+    val userActivityLiveData: LiveData<List<MedicalGetDataResult>> = _userActivityLiveData
 
     private var userData = UserDataModel()
 
@@ -39,9 +45,9 @@ class ProfilePatientViewModel @Inject constructor(
                     login = it.login,
                     fullname = it.fullname,
                     isDoctor = it.isDoctor,
-                    doctor = if (it.doctorId != null) SimpleUserModel(
-                        it.doctorId!!,
-                        it.doctorId!!
+                    doctor = if (it.doctor != null) SimpleUserModel(
+                        it.doctor!!.login,
+                        it.doctor!!.fullname
                     ) else null,
                     patients = it.patients?.map { model ->
                         SimpleUserModel(model.login, model.fullname)
@@ -59,6 +65,7 @@ class ProfilePatientViewModel @Inject constructor(
     override fun onStart() {
         viewModelScope.launch {
             loadUserData()
+            loadUserActivities()
         }
     }
 
@@ -68,5 +75,15 @@ class ProfilePatientViewModel @Inject constructor(
             userData.doctor?.fullname ?: ""
         )
         _navigationLiveData.postValue(action)
+    }
+
+    private suspend fun loadUserActivities() {
+        medicalGetDataUseCase.invoke(login).onSuccess {
+            if (it != null) {
+                _userActivityLiveData.postValue(it)
+            }
+        }.onFailure {
+            _messageLiveData.postValue(it)
+        }
     }
 }

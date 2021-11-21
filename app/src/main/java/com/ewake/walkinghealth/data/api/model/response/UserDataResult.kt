@@ -14,13 +14,13 @@ data class UserDataResult(
     var fullname: String = "",
     @Json(name = "isDoctor")
     var isDoctor: Boolean = false,
-    @Json(name = "doctorId")
-    var doctorId: String? = null,
+    @Json(name = "doctor")
+    var doctor: UserModel? = null,
     @Json(name = "patients")
-    var patients: List<Patients>? = null
+    var patients: List<UserModel>? = null
 ) {
     @JsonClass(generateAdapter = true)
-    data class Patients(
+    data class UserModel(
         @Json(name = "login")
         var login: String = "",
         @Json(name = "fullname")

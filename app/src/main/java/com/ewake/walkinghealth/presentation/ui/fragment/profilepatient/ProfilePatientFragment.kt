@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import com.ewake.walkinghealth.databinding.FragmentProfilePatientBinding
 import com.ewake.walkinghealth.presentation.model.SimpleUserModel
 import com.ewake.walkinghealth.presentation.model.UserDataModel
-import com.ewake.walkinghealth.presentation.ui.activity.MainActivity
 import com.ewake.walkinghealth.presentation.viewmodel.profilepatient.ProfilePatientViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,10 +45,13 @@ class ProfilePatientFragment : Fragment() {
             userDataLiveData.observe(viewLifecycleOwner, ::setData)
             messageLiveData.observe(viewLifecycleOwner, ::showMessage)
             navigationLiveData.observe(viewLifecycleOwner, ::navigate)
+
             start()
         }
 
-        binding.messages.setOnClickListener { viewModel.onMessagesClicked() }
+        binding.apply {
+            messages.setOnClickListener { viewModel.onMessagesClicked() }
+        }
 
         return binding.root
     }
@@ -73,4 +75,5 @@ class ProfilePatientFragment : Fragment() {
     private fun navigate(action: NavDirections) {
         findNavController().navigate(action)
     }
+
 }

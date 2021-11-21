@@ -40,7 +40,7 @@ class LoginViewModel @Inject constructor(
         if (response.code == HttpURLConnection.HTTP_OK && response.result != null) {
             response.result?.let {
                 userDataPrefs.isDoctor= it.isDoctor
-                userDataPrefs.login = it.login
+                userDataPrefs.login = login
                 userDataPrefs.token = it.token
 
                 _startServicesLiveData.postValue(Unit)
@@ -48,7 +48,7 @@ class LoginViewModel @Inject constructor(
                     if (it.isDoctor) {
                         LoginFragmentDirections.actionLoginFragmentToProfileDoctorFragment()
                     } else {
-                        LoginFragmentDirections.actionLoginFragmentToProfileFragment()
+                        LoginFragmentDirections.actionLoginFragmentToProfileFragment(login)
                     }
                 )
             }

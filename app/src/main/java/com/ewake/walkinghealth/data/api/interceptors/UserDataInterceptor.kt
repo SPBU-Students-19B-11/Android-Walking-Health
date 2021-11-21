@@ -19,6 +19,6 @@ class UserDataInterceptor @Inject constructor(private val prefs: UserDataPrefs) 
 
     companion object {
         private const val TOKEN_HEADER = "AuthToken"
-        private const val USER_LOGIN_HEADER = "UserId"
+        private const val USER_LOGIN_HEADER = "CurrentUserLogin"
     }
 }

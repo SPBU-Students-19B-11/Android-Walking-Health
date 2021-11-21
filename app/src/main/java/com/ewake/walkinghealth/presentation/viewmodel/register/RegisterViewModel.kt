@@ -83,12 +83,12 @@ class RegisterViewModel @Inject constructor(
         ).onSuccess {
             if (it != null) {
                 _messageLiveData.postValue("Вы успешно зарегистрированы")
-                saveUserLoginUseCase.invoke(it.login)
+                saveUserLoginUseCase.invoke(model.login)
                 saveUserTokenUseCase.invoke(it.token)
                 if (it.isDoctor) {
                     LoginFragmentDirections.actionLoginFragmentToProfileDoctorFragment()
                 } else {
-                    LoginFragmentDirections.actionLoginFragmentToProfileFragment()
+                    LoginFragmentDirections.actionLoginFragmentToProfileFragment(model.login)
                 }
             }
         }

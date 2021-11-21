@@ -5,10 +5,8 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class AuthResponse(
-    @Json(name = "token")
+    @Json(name = "AuthToken")
     var token: String = "",
-    @Json(name = "login")
-    var login: String = "",
     @Json(name = "isDoctor")
     var isDoctor: Boolean = false
 )

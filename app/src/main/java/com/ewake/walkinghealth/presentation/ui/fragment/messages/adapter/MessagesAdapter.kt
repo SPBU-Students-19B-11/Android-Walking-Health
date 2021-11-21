@@ -6,6 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ewake.walkinghealth.databinding.MessageItemBinding
 import com.ewake.walkinghealth.presentation.model.MessageModel
+import java.sql.Date
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
@@ -25,7 +29,7 @@ class MessagesAdapter : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>(
         fun bind(item: MessageModel) {
             binding.apply {
                 message.text = item.message
-                time.text = item.timestamp.toString()
+                time.text = SimpleDateFormat("dd.MM.yyy HH:mm", Locale.getDefault()).format(Date(item.timestamp * 1000))
             }
         }
     }
