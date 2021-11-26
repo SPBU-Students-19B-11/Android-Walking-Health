@@ -40,9 +40,7 @@
             tools:node="remove">
         </provider>
 
-        <service android:name="com.ewake.walkinghealth.presentation.service.StepCountingService"/>
-        <service android:name="com.ewake.walkinghealth.presentation.service.AccelerationService"/>
-        <service android:name="com.ewake.walkinghealth.presentation.service.SpeedService"/>
+        <service android:name="com.ewake.walkinghealth.presentation.service.UserActivityService"/>
     </application>
 
 </manifest>
