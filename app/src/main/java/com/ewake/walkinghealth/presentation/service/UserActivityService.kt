@@ -110,9 +110,9 @@ class UserActivityService : Service(), SensorEventListener, LocationListener {
         val timeStamp = System.currentTimeMillis()
 
         val intent = Intent(USER_ACTIVITY_SERVICE_TAG)
-            .putExtra(ACCELERATION_KEY, if (accelerationCount != 0) accelerationSum / accelerationCount else 0)
+            .putExtra(ACCELERATION_KEY, if (accelerationCount != 0) accelerationSum / accelerationCount else 0.0)
             .putExtra(TIMESTAMP_KEY, timeStamp)
-            .putExtra(SPEED_KEY, if (speedCount != 0) speedSum / speedCount else 0)
+            .putExtra(SPEED_KEY, if (speedCount != 0) speedSum / speedCount else 0.0)
             .putExtra(STEPS_KEY, steps)
 
         sendBroadcast(intent)

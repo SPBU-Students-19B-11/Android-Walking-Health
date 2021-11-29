@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.ewake.walkinghealth.data.api.Api
 import com.ewake.walkinghealth.data.api.interceptors.UserDataInterceptor
+import com.ewake.walkinghealth.data.local.prefs.BroadcastPrefs
 import com.ewake.walkinghealth.data.local.room.AppDatabase
+import com.ewake.walkinghealth.presentation.broadcastreceiver.UserActivityReceiver
+import com.ewake.walkinghealth.presentation.manager.ServiceStartingManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -56,5 +59,17 @@ class AppModule {
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(context, AppDatabase::class.java, "database.db").build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserActivityReceiver(appDatabase: AppDatabase): UserActivityReceiver {
+        return UserActivityReceiver(appDatabase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideServiceStartingManager(receiver: UserActivityReceiver, prefs: BroadcastPrefs): ServiceStartingManager {
+        return ServiceStartingManager(receiver, prefs)
     }
 }

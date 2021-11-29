@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.ewake.walkinghealth.data.api.model.response.MedicalGetDataResult
 import com.ewake.walkinghealth.data.api.model.response.onFailure
 import com.ewake.walkinghealth.data.api.model.response.onSuccess
+import com.ewake.walkinghealth.data.local.room.entity.UserActivityData
+import com.ewake.walkinghealth.data.local.room.entity.UserActivityEntity
 import com.ewake.walkinghealth.domain.usecase.MedicalGetDataUseCase
 import com.ewake.walkinghealth.domain.usecase.UserDataUseCase
 import com.ewake.walkinghealth.presentation.app.App
@@ -29,12 +31,17 @@ class ProfilePatientViewModel @Inject constructor(
     private val _userDataLiveData = MutableLiveData<UserDataModel>()
     val userDataLiveData: LiveData<UserDataModel> = _userDataLiveData
 
-    private val _userActivityLiveData = MutableLiveData<List<MedicalGetDataResult>>()
-    val userActivityLiveData: LiveData<List<MedicalGetDataResult>> = _userActivityLiveData
+    private val _userActivityLiveData = MutableLiveData<List<UserActivityData>>()
+    val userActivityLiveData: LiveData<List<UserActivityData>> = _userActivityLiveData
+
+    private val _datesLiveData = MutableLiveData<List<String>>()
+    val datesLiveData: LiveData<List<String>> = _datesLiveData
 
     private var userData = UserDataModel()
 
     var login: String? = null
+
+    private var activityData: List<UserActivityEntity> = listOf()
 
     private suspend fun loadUserData() {
         val response = userDataUseCase(login)
@@ -77,13 +84,14 @@ class ProfilePatientViewModel @Inject constructor(
         _navigationLiveData.postValue(action)
     }
 
-    private suspend fun loadUserActivities() {
-        medicalGetDataUseCase.invoke(login).onSuccess {
-            if (it != null) {
-                _userActivityLiveData.postValue(it)
-            }
-        }.onFailure {
-            _messageLiveData.postValue(it)
+    fun onDateChosen(date: String) {
+        activityData.find { it.date == date }?.let {
+            _userActivityLiveData.postValue(it.data.apply { sortByDescending { it.timestamp } })
         }
+    }
+
+    private suspend fun loadUserActivities() {
+        activityData = medicalGetDataUseCase.invoke(login)
+        _datesLiveData.postValue(activityData.map { it.date })
     }
 }
