@@ -5,6 +5,7 @@ import com.ewake.walkinghealth.data.api.model.request.MedicalSendDataRequest
 import com.ewake.walkinghealth.data.api.model.request.RegisterRequest
 import com.ewake.walkinghealth.data.api.model.request.SendMessageRequest
 import com.ewake.walkinghealth.data.api.model.response.*
+import com.ewake.walkinghealth.data.local.room.entity.UserActivityEntity
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -34,8 +35,11 @@ interface Api {
     suspend fun sendMessage(@Body request: SendMessageRequest): BaseResponse<SendMessageResponse>
 
     @POST("medical/sendData")
-    suspend fun sendMedicalData(@Body request: MedicalSendDataRequest): BaseResponse<Any>
+    suspend fun sendMedicalData(@Body request: UserActivityEntity): BaseResponse<Any>
 
     @GET("medical/getData")
-    suspend fun getMedicalData(@Query("PatientLogin") login: String?): BaseResponse<List<MedicalGetDataResult>>
+    suspend fun getMedicalData(@Query("PatientLogin") login: String?, @Query("date") date: String): BaseResponse<UserActivityEntity>
+
+    @GET("medical/getDates")
+    suspend fun getMedicalDates(): List<String>
 }

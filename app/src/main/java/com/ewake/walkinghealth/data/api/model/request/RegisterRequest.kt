@@ -15,5 +15,7 @@ data class RegisterRequest(
     @Json(name = "fullname")
     var fullname: String,
     @Json(name = "doctorLogin")
-    var doctorLogin: String? = null
+    var doctorLogin: String? = null,
+    @Json(name = "stepLength")
+    var stepLength: Double? = null
 )

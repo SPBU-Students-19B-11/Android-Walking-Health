@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.22552083333333334" />
         <entry key="..\:/WalkingHealth/app/src/main/res/layout/activity_main.xml" value="0.16893115942028986" />
         <entry key="..\:/WalkingHealth/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/WalkingHealth/app/src/main/res/layout/fragment_messages.xml" value="0.2212962962962963" />
@@ -20,6 +21,8 @@
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/item_patient.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/item_profile.xml" value="0.17223910840932116" />
+        <entry key="app/src/main/res/layout/item_user_activity.xml" value="0.335" />
       </map>
     </option>
   </component>

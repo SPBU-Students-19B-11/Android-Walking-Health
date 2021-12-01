@@ -6,9 +6,12 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @Entity
+@JsonClass(generateAdapter = true)
 data class UserActivityEntity(
     @PrimaryKey
+    @Json(name = "date")
     var date: String,
+    @Json(name = "data")
     var data: MutableList<UserActivityData> = mutableListOf()
 )
 

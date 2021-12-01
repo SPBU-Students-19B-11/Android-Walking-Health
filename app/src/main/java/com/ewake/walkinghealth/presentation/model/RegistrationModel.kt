@@ -8,5 +8,6 @@ data class RegistrationModel(
     var password: String = "",
     var fullname: String = "",
     var isDoctor: Boolean = false,
-    var selectedDoctor: SimpleUserModel? = null
+    var selectedDoctor: SimpleUserModel? = null,
+    var stepLength: Double? = null
 )

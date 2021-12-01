@@ -8,5 +8,7 @@ data class AuthResponse(
     @Json(name = "AuthToken")
     var token: String = "",
     @Json(name = "isDoctor")
-    var isDoctor: Boolean = false
+    var isDoctor: Boolean = false,
+    @Json(name = "stepLength")
+    var stepLength: Float = 0.0f
 )

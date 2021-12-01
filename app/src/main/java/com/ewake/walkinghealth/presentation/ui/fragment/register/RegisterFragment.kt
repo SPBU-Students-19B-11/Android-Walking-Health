@@ -43,7 +43,8 @@ class RegisterFragment : Fragment() {
                 SimpleUserModel(fullname = binding.doctors.text.toString())
             } else {
                 null
-            }
+            },
+            stepLength = binding.step.text?.toString()?.toIntOrNull()?.times(0.43)
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {

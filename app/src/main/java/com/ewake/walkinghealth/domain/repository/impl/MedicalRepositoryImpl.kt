@@ -56,15 +56,20 @@ class MedicalRepositoryImpl @Inject constructor(private val api: Api, private va
         )*/
     }
 
-    override suspend fun sendData(data: MedicalSendDataRequest): BaseResponse<Any> {
+    override suspend fun sendData(data: UserActivityEntity): BaseResponse<Any> {
         // return api.sendMedicalData(data)
         return BaseResponse(code = 200, message = "OK")
     }
 
-    override suspend fun getData(login: String?): List<UserActivityEntity> {
+    override suspend fun getData(login: String?, date: String): BaseResponse<UserActivityEntity> {
         // return api.getMedicalData(login)
 
-        return appDatabase.getUserActivityDao().getAll()
+        return BaseResponse(200, result = appDatabase.getUserActivityDao().getItem(date))
+    }
+
+    override suspend fun getDates(): BaseResponse<List<String>> {
+        // return api.getMedicalDates()
+       return BaseResponse(200, result = appDatabase.getUserActivityDao().getAll().map { it.date })
     }
 
     override suspend fun sendMessage(message: SendMessageRequest): BaseResponse<SendMessageResponse> {

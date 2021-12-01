@@ -8,6 +8,7 @@ import com.ewake.walkinghealth.data.api.model.response.onFailure
 import com.ewake.walkinghealth.data.api.model.response.onSuccess
 import com.ewake.walkinghealth.data.local.room.entity.UserActivityData
 import com.ewake.walkinghealth.data.local.room.entity.UserActivityEntity
+import com.ewake.walkinghealth.domain.repository.medical.MedicalRepository
 import com.ewake.walkinghealth.domain.usecase.MedicalGetDataUseCase
 import com.ewake.walkinghealth.domain.usecase.UserDataUseCase
 import com.ewake.walkinghealth.presentation.app.App
@@ -25,7 +26,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfilePatientViewModel @Inject constructor(
     private val userDataUseCase: UserDataUseCase,
-    private val medicalGetDataUseCase: MedicalGetDataUseCase
+    private val medicalGetDataUseCase: MedicalGetDataUseCase,
+    private val medicalRepository: MedicalRepository
 ) : BaseViewModel() {
 
     private val _userDataLiveData = MutableLiveData<UserDataModel>()
@@ -40,8 +42,6 @@ class ProfilePatientViewModel @Inject constructor(
     private var userData = UserDataModel()
 
     var login: String? = null
-
-    private var activityData: List<UserActivityEntity> = listOf()
 
     private suspend fun loadUserData() {
         val response = userDataUseCase(login)
@@ -72,7 +72,7 @@ class ProfilePatientViewModel @Inject constructor(
     override fun onStart() {
         viewModelScope.launch {
             loadUserData()
-            loadUserActivities()
+            loadDates()
         }
     }
 
@@ -85,13 +85,22 @@ class ProfilePatientViewModel @Inject constructor(
     }
 
     fun onDateChosen(date: String) {
-        activityData.find { it.date == date }?.let {
-            _userActivityLiveData.postValue(it.data.apply { sortByDescending { it.timestamp } })
+        viewModelScope.launch {
+            loadUserActivities(date)
         }
     }
 
-    private suspend fun loadUserActivities() {
-        activityData = medicalGetDataUseCase.invoke(login)
-        _datesLiveData.postValue(activityData.map { it.date })
+    private suspend fun loadDates() {
+        medicalRepository.getDates().onSuccess { list ->
+            list?.let { _datesLiveData.postValue(it) }
+        }
+    }
+
+    private suspend fun loadUserActivities(date: String) {
+        medicalGetDataUseCase.invoke(login, date).onSuccess { result ->
+            if (result != null) {
+                _userActivityLiveData.postValue(result.data)
+            }
+        }
     }
 }

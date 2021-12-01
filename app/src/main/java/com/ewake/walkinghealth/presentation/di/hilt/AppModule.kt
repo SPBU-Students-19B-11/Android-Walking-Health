@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.ewake.walkinghealth.data.api.Api
 import com.ewake.walkinghealth.data.api.interceptors.UserDataInterceptor
 import com.ewake.walkinghealth.data.local.prefs.BroadcastPrefs
+import com.ewake.walkinghealth.data.local.prefs.UserDataPrefs
 import com.ewake.walkinghealth.data.local.room.AppDatabase
 import com.ewake.walkinghealth.presentation.broadcastreceiver.UserActivityReceiver
 import com.ewake.walkinghealth.presentation.manager.ServiceStartingManager
@@ -63,8 +64,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideUserActivityReceiver(appDatabase: AppDatabase): UserActivityReceiver {
-        return UserActivityReceiver(appDatabase)
+    fun provideUserActivityReceiver(appDatabase: AppDatabase, userDataPrefs: UserDataPrefs): UserActivityReceiver {
+        return UserActivityReceiver(appDatabase, userDataPrefs)
     }
 
     @Provides

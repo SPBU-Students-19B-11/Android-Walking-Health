@@ -3,6 +3,7 @@ package com.ewake.walkinghealth.presentation.broadcastreceiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.ewake.walkinghealth.data.local.prefs.UserDataPrefs
 import com.ewake.walkinghealth.data.local.room.AppDatabase
 import com.ewake.walkinghealth.data.local.room.entity.UserActivityData
 import com.ewake.walkinghealth.data.local.room.entity.UserActivityEntity
@@ -13,7 +14,10 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
-class UserActivityReceiver @Inject constructor(appDatabase: AppDatabase) : BroadcastReceiver() {
+class UserActivityReceiver @Inject constructor(
+    appDatabase: AppDatabase,
+    private val userDataPrefs: UserDataPrefs
+) : BroadcastReceiver() {
 
     private val dao = appDatabase.getUserActivityDao()
 
@@ -28,7 +32,7 @@ class UserActivityReceiver @Inject constructor(appDatabase: AppDatabase) : Broad
                 timestamp = timestamp,
                 speed = speed,
                 acceleration = acceleration,
-                distance = steps * 0.5
+                distance = steps * userDataPrefs.stepSize.toDouble()
             )
 
             val currentDate = SimpleDateFormat("dd.MM.yyy", Locale.getDefault()).format(Date())

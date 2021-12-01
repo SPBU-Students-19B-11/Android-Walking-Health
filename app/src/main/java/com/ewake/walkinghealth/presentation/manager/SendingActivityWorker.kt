@@ -13,6 +13,7 @@ import com.ewake.walkinghealth.data.api.model.request.SendMessageRequest
 import com.ewake.walkinghealth.data.api.model.response.isSuccess
 import com.ewake.walkinghealth.data.api.model.response.onSuccess
 import com.ewake.walkinghealth.data.local.room.AppDatabase
+import com.ewake.walkinghealth.data.local.room.entity.UserActivityEntity
 import com.ewake.walkinghealth.domain.repository.medical.MedicalRepository
 import com.ewake.walkinghealth.presentation.app.App
 import dagger.assisted.Assisted
@@ -49,7 +50,7 @@ class SendingActivityWorker @AssistedInject constructor(
     }
 
     //TODO
-    private suspend fun sendData(request: MedicalSendDataRequest): Boolean {
+    private suspend fun sendData(request: UserActivityEntity): Boolean {
         Log.d(TAG, "Send data from: ${request.date}")
         val result = medicalRepository.sendData(request).isSuccess()
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ewake.walkinghealth.data.api.model.response.onSuccess
+import com.ewake.walkinghealth.data.local.prefs.UserDataPrefs
 import com.ewake.walkinghealth.domain.usecase.DoctorsUseCase
 import com.ewake.walkinghealth.domain.usecase.RegisterUseCase
 import com.ewake.walkinghealth.domain.usecase.SaveUserLoginUseCase
@@ -24,8 +25,7 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val doctorsUseCase: DoctorsUseCase,
     private val registerUseCase: RegisterUseCase,
-    private val saveUserTokenUseCase: SaveUserTokenUseCase,
-    private val saveUserLoginUseCase: SaveUserLoginUseCase
+    private val userDataPrefs: UserDataPrefs
 ) : BaseViewModel() {
 
     private val _doctorsLiveData = MutableLiveData<MutableList<String>>()
@@ -83,8 +83,10 @@ class RegisterViewModel @Inject constructor(
         ).onSuccess {
             if (it != null) {
                 _messageLiveData.postValue("Вы успешно зарегистрированы")
-                saveUserLoginUseCase.invoke(model.login)
-                saveUserTokenUseCase.invoke(it.token)
+                userDataPrefs.login = model.login
+                userDataPrefs.token = it.token
+                userDataPrefs.stepSize = it.stepLength
+
                 if (it.isDoctor) {
                     LoginFragmentDirections.actionLoginFragmentToProfileDoctorFragment()
                 } else {
