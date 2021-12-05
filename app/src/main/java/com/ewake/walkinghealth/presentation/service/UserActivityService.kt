@@ -56,7 +56,9 @@ class UserActivityService : Service(), SensorEventListener, LocationListener {
         super.onCreate()
         Log.d(USER_ACTIVITY_SERVICE_TAG, "Starting")
 
-        val registerResult = sensorManager?.registerListener(this, accelerationSensor, 0) == true
+        startForeground(SERVICE_ID, notification)
+
+        val registerResult = sensorManager?.registerListener(this, accelerationSensor, SensorManager.SENSOR_DELAY_NORMAL) == true
             && sensorManager?.registerListener(this, stepSensor, 0) == true
 
         if (!registerResult) {
@@ -91,7 +93,6 @@ class UserActivityService : Service(), SensorEventListener, LocationListener {
 
             steps = 0
         }
-        startForeground(SERVICE_ID, notification)
     }
 
     override fun onDestroy() {
