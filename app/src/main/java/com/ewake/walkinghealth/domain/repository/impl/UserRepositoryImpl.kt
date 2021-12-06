@@ -34,14 +34,16 @@ class UserRepositoryImpl @Inject constructor(
         login: String,
         password: String,
         fullname: String,
-        doctorLogin: String?
+        doctorLogin: String?,
+        stepLength: Double?
     ): BaseResponse<AuthResponse> {
         return api.register(
             RegisterRequest(
                 login = login,
                 password = password,
                 fullname = fullname,
-                doctorLogin = doctorLogin
+                doctorLogin = doctorLogin,
+                stepLength = stepLength
             )
         )
 

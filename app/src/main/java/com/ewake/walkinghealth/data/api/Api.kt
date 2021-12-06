@@ -41,5 +41,5 @@ interface Api {
     suspend fun getMedicalData(@Query("PatientLogin") login: String?, @Query("date") date: String): BaseResponse<UserActivityEntity>
 
     @GET("medical/getDates")
-    suspend fun getMedicalDates(): List<String>
+    suspend fun getMedicalDates(@Query("patient") patient: String): BaseResponse<List<String>>
 }

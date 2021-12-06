@@ -17,8 +17,7 @@ import javax.inject.Inject
 /**
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
-class MedicalRepositoryImpl @Inject constructor(private val api: Api, private val appDatabase: AppDatabase) :
-    MedicalRepository {
+class MedicalRepositoryImpl @Inject constructor(private val api: Api) : MedicalRepository {
     override suspend fun getDoctors(): BaseResponse<List<GetDoctorsResult>> {
         return api.getDoctors()
 
@@ -57,19 +56,19 @@ class MedicalRepositoryImpl @Inject constructor(private val api: Api, private va
     }
 
     override suspend fun sendData(data: UserActivityEntity): BaseResponse<Any> {
-        // return api.sendMedicalData(data)
-        return BaseResponse(code = 200, message = "OK")
+        return api.sendMedicalData(data)
+        // return BaseResponse(code = 200, message = "OK")
     }
 
     override suspend fun getData(login: String?, date: String): BaseResponse<UserActivityEntity> {
-        // return api.getMedicalData(login)
+        return api.getMedicalData(login, date)
 
-        return BaseResponse(200, result = appDatabase.getUserActivityDao().getItem(date))
+        // return BaseResponse(200, result = appDatabase.getUserActivityDao().getItem(date))
     }
 
-    override suspend fun getDates(): BaseResponse<List<String>> {
-        // return api.getMedicalDates()
-       return BaseResponse(200, result = appDatabase.getUserActivityDao().getAll().map { it.date })
+    override suspend fun getDates(patient: String): BaseResponse<List<String>> {
+        return api.getMedicalDates(patient)
+       //return BaseResponse(200, result = appDatabase.getUserActivityDao().getAll().map { it.date })
     }
 
     override suspend fun sendMessage(message: SendMessageRequest): BaseResponse<SendMessageResponse> {

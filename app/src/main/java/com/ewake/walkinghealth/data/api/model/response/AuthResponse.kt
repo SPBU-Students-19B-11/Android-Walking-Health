@@ -10,5 +10,5 @@ data class AuthResponse(
     @Json(name = "isDoctor")
     var isDoctor: Boolean = false,
     @Json(name = "stepLength")
-    var stepLength: Float = 0.0f
+    var stepLength: Float? = null
 )

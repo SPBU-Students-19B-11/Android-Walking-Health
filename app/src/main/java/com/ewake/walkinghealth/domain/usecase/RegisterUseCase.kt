@@ -11,6 +11,7 @@ class RegisterUseCase @Inject constructor(private val userRepository: UserReposi
         login: String,
         password: String,
         fullname: String,
-        doctorLogin: String? = null
-    ) = userRepository.register(login, password, fullname, doctorLogin)
+        doctorLogin: String? = null,
+        stepLength: Double? = null
+    ) = userRepository.register(login, password, fullname, doctorLogin, stepLength)
 }

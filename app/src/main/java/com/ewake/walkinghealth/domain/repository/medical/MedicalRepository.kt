@@ -16,6 +16,6 @@ interface MedicalRepository : BaseRepository {
     suspend fun getMessages(login: String): BaseResponse<List<MessagesResult>>
     suspend fun sendData(data: UserActivityEntity): BaseResponse<Any>
     suspend fun getData(login: String?, date: String): BaseResponse<UserActivityEntity>
-    suspend fun getDates(): BaseResponse<List<String>>
+    suspend fun getDates(patient: String): BaseResponse<List<String>>
     suspend fun sendMessage(message: SendMessageRequest): BaseResponse<SendMessageResponse>
 }

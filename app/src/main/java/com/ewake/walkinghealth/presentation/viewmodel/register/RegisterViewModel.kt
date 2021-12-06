@@ -79,13 +79,15 @@ class RegisterViewModel @Inject constructor(
             model.login,
             model.password,
             model.fullname,
-            model.selectedDoctor?.login
+            model.selectedDoctor?.login,
+            model.stepLength
         ).onSuccess {
             if (it != null) {
                 _messageLiveData.postValue("Вы успешно зарегистрированы")
                 userDataPrefs.login = model.login
                 userDataPrefs.token = it.token
-                userDataPrefs.stepSize = it.stepLength
+                if (it.stepLength != null)
+                    userDataPrefs.stepSize = it.stepLength!!
 
                 if (it.isDoctor) {
                     LoginFragmentDirections.actionLoginFragmentToProfileDoctorFragment()

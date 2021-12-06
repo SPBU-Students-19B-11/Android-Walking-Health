@@ -91,7 +91,7 @@ class ProfilePatientViewModel @Inject constructor(
     }
 
     private suspend fun loadDates() {
-        medicalRepository.getDates().onSuccess { list ->
+        medicalRepository.getDates(login!!).onSuccess { list ->
             list?.let { _datesLiveData.postValue(it) }
         }
     }

@@ -42,7 +42,8 @@ class LoginViewModel @Inject constructor(
                 userDataPrefs.isDoctor= it.isDoctor
                 userDataPrefs.login = login
                 userDataPrefs.token = it.token
-                userDataPrefs.stepSize = it.stepLength
+                if (it.stepLength != null)
+                    userDataPrefs.stepSize = it.stepLength!!
 
                 _startServicesLiveData.postValue(Unit)
                 _navigationLiveData.postValue(

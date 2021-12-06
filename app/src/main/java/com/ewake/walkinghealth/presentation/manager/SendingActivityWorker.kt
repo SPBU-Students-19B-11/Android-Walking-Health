@@ -43,13 +43,16 @@ class SendingActivityWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         Log.d(TAG, "Sending starting")
 
-        //TODO
         val userActivities = dao.getAll()
+
+        userActivities.forEach {
+            val isSuccess = sendData(it)
+            if (!isSuccess) return Result.failure()
+        }
 
         return Result.success()
     }
 
-    //TODO
     private suspend fun sendData(request: UserActivityEntity): Boolean {
         Log.d(TAG, "Send data from: ${request.date}")
         val result = medicalRepository.sendData(request).isSuccess()

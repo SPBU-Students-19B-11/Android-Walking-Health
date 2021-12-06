@@ -44,7 +44,7 @@ class RegisterFragment : Fragment() {
             } else {
                 null
             },
-            stepLength = binding.step.text?.toString()?.toIntOrNull()?.times(0.43)
+            stepLength = binding.step.text?.toString()?.toIntOrNull()?.times(0.43)?.div(100)
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {

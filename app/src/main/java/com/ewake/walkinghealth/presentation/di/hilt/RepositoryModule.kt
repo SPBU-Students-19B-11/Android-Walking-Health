@@ -23,5 +23,5 @@ class RepositoryModule {
         UserRepositoryImpl(api, userDataPrefs)
 
     @Provides
-    fun provideMedicalRepository(api: Api, appDatabase: AppDatabase): MedicalRepository = MedicalRepositoryImpl(api, appDatabase)
+    fun provideMedicalRepository(api: Api): MedicalRepository = MedicalRepositoryImpl(api)
 }
