@@ -41,6 +41,10 @@ class ProfileDoctorFragment : Fragment() {
                     onItemClickListener = viewModel::onPatientClicked
                 }
             }
+
+            exit.setOnClickListener {
+                viewModel.exit()
+            }
         }
 
         viewModel.apply {

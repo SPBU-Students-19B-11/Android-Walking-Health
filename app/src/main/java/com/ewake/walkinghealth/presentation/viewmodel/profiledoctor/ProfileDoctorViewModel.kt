@@ -53,6 +53,12 @@ class ProfileDoctorViewModel @Inject constructor(
         }
     }
 
+    fun exit() {
+        userDataPrefs.token = null
+        userDataPrefs.login = null
+        _navigationLiveData.postValue(ProfileDoctorFragmentDirections.actionProfileDoctorFragmentToSplashFragment())
+    }
+
     fun onPatientClicked(model: SimpleUserModel) {
         _navigationLiveData.postValue(
             ProfileDoctorFragmentDirections.actionProfileDoctorFragmentToProfileFragment(model.login)

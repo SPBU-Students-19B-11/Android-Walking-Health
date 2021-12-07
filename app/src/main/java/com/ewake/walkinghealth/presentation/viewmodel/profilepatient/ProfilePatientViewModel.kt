@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ewake.walkinghealth.data.api.model.response.MedicalGetDataResult
 import com.ewake.walkinghealth.data.api.model.response.onFailure
 import com.ewake.walkinghealth.data.api.model.response.onSuccess
+import com.ewake.walkinghealth.data.local.prefs.UserDataPrefs
 import com.ewake.walkinghealth.data.local.room.entity.UserActivityData
 import com.ewake.walkinghealth.data.local.room.entity.UserActivityEntity
 import com.ewake.walkinghealth.domain.repository.medical.MedicalRepository
@@ -27,7 +28,8 @@ import javax.inject.Inject
 class ProfilePatientViewModel @Inject constructor(
     private val userDataUseCase: UserDataUseCase,
     private val medicalGetDataUseCase: MedicalGetDataUseCase,
-    private val medicalRepository: MedicalRepository
+    private val medicalRepository: MedicalRepository,
+    private val userDataPrefs: UserDataPrefs
 ) : BaseViewModel() {
 
     private val _userDataLiveData = MutableLiveData<UserDataModel>()
@@ -38,6 +40,9 @@ class ProfilePatientViewModel @Inject constructor(
 
     private val _datesLiveData = MutableLiveData<List<String>>()
     val datesLiveData: LiveData<List<String>> = _datesLiveData
+
+    private val _exitVisibleLiveData = MutableLiveData<Boolean>()
+    val exitVisibleLiveData: LiveData<Boolean> = _exitVisibleLiveData
 
     private var userData = UserDataModel()
 
@@ -71,6 +76,14 @@ class ProfilePatientViewModel @Inject constructor(
 
     override fun onStart() {
         viewModelScope.launch {
+            _exitVisibleLiveData.postValue(!userDataPrefs.isDoctor)
+            loadUserData()
+            loadDates()
+        }
+    }
+
+    fun reload() {
+        viewModelScope.launch {
             loadUserData()
             loadDates()
         }
@@ -102,5 +115,11 @@ class ProfilePatientViewModel @Inject constructor(
                 _userActivityLiveData.postValue(result.data)
             }
         }
+    }
+
+    fun onExitClicked() {
+        userDataPrefs.login = null
+        userDataPrefs.token = null
+        _navigationLiveData.postValue(ProfilePatientFragmentDirections.actionProfileFragmentToSplashFragment())
     }
 }

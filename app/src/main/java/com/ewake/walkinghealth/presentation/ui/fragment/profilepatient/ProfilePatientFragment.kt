@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -58,6 +59,7 @@ class ProfilePatientFragment : Fragment() {
             navigationLiveData.observe(viewLifecycleOwner, ::navigate)
             datesLiveData.observe(viewLifecycleOwner, ::setDateList)
             userActivityLiveData.observe(viewLifecycleOwner, ::setActivitiesData)
+            exitVisibleLiveData.observe(viewLifecycleOwner, { binding.exit.isVisible = it })
             start()
         }
 
@@ -73,9 +75,18 @@ class ProfilePatientFragment : Fragment() {
             date.setOnItemClickListener { _, _, position, _ ->
                 viewModel.onDateChosen(datesAdapter.getItem(position)!!)
             }
+
+            exit.setOnClickListener {
+                viewModel.onExitClicked()
+            }
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.reload()
     }
 
     override fun onDestroyView() {
