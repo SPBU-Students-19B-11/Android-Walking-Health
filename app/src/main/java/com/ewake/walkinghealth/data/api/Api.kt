@@ -29,7 +29,7 @@ interface Api {
     suspend fun getUserData(@Query("login") login: String? = null): BaseResponse<UserDataResult>
 
     @GET("medical/getMessages")
-    suspend fun getMessages(@Query("PatientLogin") login: String): BaseResponse<List<MessagesResult>>
+    suspend fun getMessages(@Query("PatientLogin") login: String): BaseResponse<MessagesResult>
 
     @POST("medical/sendMessage")
     suspend fun sendMessage(@Body request: SendMessageRequest): BaseResponse<SendMessageResponse>

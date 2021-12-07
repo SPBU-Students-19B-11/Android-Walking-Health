@@ -13,7 +13,7 @@ import com.ewake.walkinghealth.domain.repository.base.BaseRepository
  */
 interface MedicalRepository : BaseRepository {
     suspend fun getDoctors(): BaseResponse<List<GetDoctorsResult>>
-    suspend fun getMessages(login: String): BaseResponse<List<MessagesResult>>
+    suspend fun getMessages(login: String): BaseResponse<MessagesResult>
     suspend fun sendData(data: UserActivityEntity): BaseResponse<Any>
     suspend fun getData(login: String?, date: String): BaseResponse<UserActivityEntity>
     suspend fun getDates(patient: String): BaseResponse<List<String>>

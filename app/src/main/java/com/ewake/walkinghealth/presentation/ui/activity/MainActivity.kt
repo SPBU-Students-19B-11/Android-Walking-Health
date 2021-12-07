@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import androidx.work.WorkManager
+import com.ewake.walkinghealth.presentation.manager.ServiceStartingManager
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container_host) as NavHostFragment
         navHostFragment.navController
     }
+
+    @Inject
+    lateinit var serviceStartingManager: ServiceStartingManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +54,11 @@ class MainActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             createServiceNotificationsChannel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        serviceStartingManager.sendData(this)
     }
 
     @SuppressLint("NewApi")

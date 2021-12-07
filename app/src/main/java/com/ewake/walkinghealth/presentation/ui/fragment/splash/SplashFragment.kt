@@ -49,6 +49,5 @@ class SplashFragment: Fragment() {
 
     private fun startServices(unit: Unit) {
         activity?.let { serviceStartingManager.startServices(it) }
-        serviceStartingManager.sendData(requireContext())
     }
 }

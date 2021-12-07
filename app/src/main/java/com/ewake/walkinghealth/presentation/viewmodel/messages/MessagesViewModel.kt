@@ -45,9 +45,9 @@ class MessagesViewModel @Inject constructor(
 
         response.onSuccess { result ->
             if (result != null) {
-                messages = result.map {
+                messages = result.messages?.map {
                     MessageModel(message = it.message, timestamp = it.timestamp)
-                }.toMutableList()
+                }?.toMutableList() ?: mutableListOf()
 
                 _messagesLiveData.postValue(messages)
             }

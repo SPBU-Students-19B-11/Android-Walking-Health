@@ -35,7 +35,7 @@ class MedicalRepositoryImpl @Inject constructor(private val api: Api) : MedicalR
         )*/
     }
 
-    override suspend fun getMessages(login: String): BaseResponse<List<MessagesResult>> {
+    override suspend fun getMessages(login: String): BaseResponse<MessagesResult> {
         return api.getMessages(login)
 
         /*return BaseResponse(
